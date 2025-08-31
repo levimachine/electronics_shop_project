@@ -6,7 +6,7 @@ from src.item import Item
 
 @pytest.fixture
 def copy_item():
-    return Item('Зарядник', 1000.0, 5)
+    return Item('Зарядник', 1000, 5)
 
 
 def test_calculate_total_price(copy_item):
@@ -41,3 +41,11 @@ def test_string_to_number(copy_item):
     assert copy_item.string_to_number('5.5') == 5
     assert copy_item.string_to_number('5') == 5
     assert copy_item.string_to_number('5.0') == 5
+
+
+def test_repr(copy_item):
+    assert repr(copy_item) == "Item('Зарядник', 1000, 5)"
+
+
+def test_str(copy_item):
+    assert str(copy_item) == 'Зарядник'
