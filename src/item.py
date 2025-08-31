@@ -20,6 +20,18 @@ class Item:
         self.price = price
         self.quantity = quantity
 
+    def __repr__(self):
+        """
+        Магический метод __repr__, возвращает представление класса(для разработчиков)
+        """
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """
+        Магический метод __str__, возвращает строку (для пользователя(например через print()))
+        """
+        return self.__name
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
