@@ -49,3 +49,13 @@ def test_repr(copy_item):
 
 def test_str(copy_item):
     assert str(copy_item) == 'Зарядник'
+
+
+def test_add(copy_item):
+    assert copy_item + copy_item == 10
+
+    with pytest.raises(TypeError):
+        copy_item + 5
+
+    with pytest.raises(TypeError):
+        copy_item + 'abc'
