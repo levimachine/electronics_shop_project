@@ -1,8 +1,10 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 
+CSV_ITEM_PATH = r'C:\Users\User\PycharmProjects\electronics-shop-project\src\items.csv'
+CSV_TEST_PATH = r'C:\Users\User\PycharmProjects\electronics-shop-project\tests\items.csv'
 
 @pytest.fixture
 def copy_item():
@@ -31,7 +33,7 @@ def test_setter(copy_item):
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv(r'C:\Users\User\PycharmProjects\electronics-shop-project\src\items.csv')
+    Item.instantiate_from_csv(CSV_ITEM_PATH)
     assert Item.all[0].name == 'Смартфон'
     assert Item.all[0].price == 100.0
     assert Item.all[0].quantity == 1
@@ -59,3 +61,10 @@ def test_add(copy_item):
 
     with pytest.raises(TypeError):
         copy_item + 'abc'
+
+
+def test_instantiate_csv_error_class(copy_item):
+    with pytest.raises(FileNotFoundError):
+        copy_item.instantiate_from_csv('items_1.csv')
+    with pytest.raises(InstantiateCSVError):
+        copy_item.instantiate_from_csv(CSV_TEST_PATH)
